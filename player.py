@@ -18,7 +18,7 @@ class Player(CircleShape):
         c = self.position - forward * self.radius + right
         return [a, b, c]
 
-    #override draw() method from CircleShape class
+    # override draw() method from CircleShape class
     def draw(self, screen) -> None:
         #Draws a polygon on the given surface
         #https://www.pygame.org/docs/ref/draw.html#pygame.draw.polygon
