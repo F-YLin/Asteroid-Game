@@ -56,11 +56,22 @@ def main():
         # player_1.update(dt)
         updatable.update(dt)
 
+        # checking if player collides with asteroids
         for asteroid in asteroids:
             if asteroid.collide_with(player_1):
                 log_event("player_hit")
                 print("Game over!")
                 sys.exit()
+
+        # checking if shot collides with asteroids
+        for asteroid in asteroids:
+            for shot in shots:
+                if asteroid.collide_with(shot):
+                    log_event("asteroid_shot")
+                    #kill() method is a build-in feature of pygame sprites
+                    # It removes the "killed" object from all its groups so that the engine stops updating and drawing it.
+                    shot.kill()
+                    asteroid.kill()
 
 
         pygame.display.flip()

@@ -42,7 +42,6 @@ class Player(CircleShape):
     # shoot method
     def shoot(self) -> None:
         # if timer's not up, shoot() don't respond, i.e. early termination
-
         if self.cooldown_timer > 0:
             return None
 
