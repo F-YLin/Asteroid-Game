@@ -71,7 +71,7 @@ def main():
                     #kill() method is a build-in feature of pygame sprites
                     # It removes the "killed" object from all its groups so that the engine stops updating and drawing it.
                     shot.kill()
-                    asteroid.kill()
+                    asteroid.split()
 
 
         pygame.display.flip()
