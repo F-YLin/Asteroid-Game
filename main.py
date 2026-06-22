@@ -5,7 +5,9 @@ from logger import log_state
 from logger import log_event
 from player import Player
 from asteroid import Asteroid
+from shot import Shot
 from asteroidfield import AsteroidField
+
 
 def main():
     pygame.init()
@@ -17,6 +19,9 @@ def main():
     updatable = pygame.sprite.Group()
     # creating a group to hold objects that could be drawn
     drawable = pygame.sprite.Group()
+    # creating a group to hold objects that are shots
+    shots = pygame.sprite.Group()
+
 
     # Player here is the name of the class, not an instance
     # this will add future Player instances into one of the two different groups
@@ -24,6 +29,7 @@ def main():
     # do the same for Asteroid class, ensure each of its instance automatically add to these groups upon creation
     Asteroid.containers = (asteroids, updatable, drawable)
     AsteroidField.containers = updatable
+    Shot.containers = (shots, updatable, drawable)
 
     asteroid_field = AsteroidField()
     player_1 = Player(SCREEN_WIDTH/2,SCREEN_HEIGHT/2)
