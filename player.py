@@ -8,6 +8,7 @@ class Player(CircleShape):
     def __init__(self, x: float, y: float) -> None:
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
+        self.cooldown_timer = 0
 
     # A player will look like a triangle, even though we'll use a circle to represent its hitbox.
     def triangle(self) -> list[pygame.Vector2]:
@@ -40,6 +41,14 @@ class Player(CircleShape):
 
     # shoot method
     def shoot(self) -> None:
+        # if timer's not up, shoot() don't respond, i.e. early termination
+
+        if self.cooldown_timer > 0:
+            return None
+
+        # else: timer's up, the main logic of shoot() is below:
+        self.cooldown_timer = PLAYER_SHOOT_COOLDOWN_SECONDS
+
         shot = Shot(self.position.x, self.position.y, SHOT_RADIUS)
         shot.velocity = pygame.Vector2(0,1)
         rotated_vector = shot.velocity.rotate(self.rotation)
@@ -67,6 +76,10 @@ class Player(CircleShape):
         # player shoots (SPACE_BAR)
         if keys[pygame.K_SPACE]:
             self.shoot()
+
+        # every time update() is called,
+        # decrease shoot timer by dt (change in time)
+        self.cooldown_timer -= dt
 
 
 
